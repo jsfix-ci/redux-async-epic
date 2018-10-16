@@ -1,0 +1,9 @@
+{
+  "name": "redux-async-epic",
+  "version": "0.0.1",
+  "description": "",
+  "module": "src/index.js",
+  "scripts": {},
+  "author": "Ivan Burnaev <ivan.biirus@gmail.com>",
+  "license": "ISC"
+}
