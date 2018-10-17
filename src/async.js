@@ -1,4 +1,4 @@
-import { Observable, of, concat } from "rxjs";
+import { Observable, of, concat, throwError } from "rxjs";
 import {
   filter,
   mergeMap,
@@ -9,17 +9,17 @@ import {
 
 import * as actions from "./actions";
 import * as handlers from "./handlers";
-import { onlyAsyncActions } from "./lib";
+import { isAsyncAction } from "./checkings";
 
-export const handleAsync = (action$, state$) =>
+export const asyncEpic = (action$, state$) =>
   action$.pipe(
-    filter(onlyAsyncActions),
+    filter(isAsyncAction),
     withLatestFrom(state$),
-    mergeMap(([action, state,]) => {
+    mergeMap(([action, state]) => {
       const { method, onSuccess, onError, ...restMeta } = action.meta;
 
       if (!method || typeof method !== "function") {
-        throw new Error(
+        return throwError(
           "[async] meta.method should be a function returns an observable"
         );
       }
@@ -27,14 +27,14 @@ export const handleAsync = (action$, state$) =>
       const result$ = method(action, state);
 
       if (!(result$ instanceof Observable)) {
-        throw new Error(
+        return throwError(
           "[async] meta.method should return an Observable instance"
         );
       }
 
       const asyncCall$ = result$.pipe(
         mergeMap(handlers.handleSuccess(action, restMeta, onSuccess)),
-        takeUntil(handlers.handleAbort(action$, action)),
+        // takeUntil(handlers.handleAbort(action$, action)),
         catchError(handlers.handleError(action, restMeta, onError))
       );
 

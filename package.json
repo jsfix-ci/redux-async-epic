@@ -1,9 +1,62 @@
 {
   "name": "redux-async-epic",
   "version": "0.0.1",
-  "description": "",
-  "module": "src/index.js",
-  "scripts": {},
+  "description": "asasdasd",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "github:biirus/redux-async-epic",
+  "bugs": "https://github.com/biirus/redux-async-epic/issues",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
   "author": "Ivan Burnaev <ivan.biirus@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf lib dist es coverage",
+    "lint": "eslint src test",
+    "format:check": "prettier-eslint --list-different \"{src,test}/*.js\"",
+    "format": "prettier-eslint --write \"{src,test}/*.js\"",
+    "build": "rollup -c",
+    "prepare": "npm run clean && npm run format:check && npm run lint && npm test",
+    "pretest": "npm run build",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
+    "test:cov": "npm test -- --coverage"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.7.0",
+    "eslint-config-react-app": "^3.0.4",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
+    "prettier-eslint-cli": "^4.7.1",
+    "redux": "^4.0.1",
+    "redux-observable": "^1.0.0",
+    "regenerator-runtime": "^0.12.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "rxjs": "^6.3.3"
+  },
+  "peerDependencies": {
+    "rxjs": ">=6.0.0-beta.0 <7"
+  }
 }

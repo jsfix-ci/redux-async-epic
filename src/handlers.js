@@ -1,26 +1,26 @@
-import { ofType } from "redux-observable";
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
+import { filter } from "rxjs/operators";
 import { getAbortType } from "./types";
-import { enshureArray } from "./lib";
+import { ensureArray } from "./lib";
 import * as actions from "./actions";
 
 export const handleAbort = (action$, action) => {
-  return action$.pipe(ofType(getAbortType(action)));
+  return action$.pipe(
+    filter(({ type }) => {
+      return type === getAbortType(action.type);
+    })
+  );
 };
 
 export const handleError = (action, restMeta, onError) => {
   return error => {
-    if (process.env.NODE_ENV === "development") {
-      console.error(error);
-    }
-
     restMeta.originalPayload = action.payload;
     const failureAction = actions.getFailureAction(action, error, restMeta);
 
     if (onError) {
       return of(
         failureAction,
-        ...enshureArray(onError(error, restMeta, action))
+        ...ensureArray(onError(error, restMeta, action))
       );
     }
     return of(failureAction);
@@ -30,10 +30,11 @@ export const handleError = (action, restMeta, onError) => {
 export const handleSuccess = (action, restMeta, onSuccess) => {
   return result => {
     const successAction = actions.getSuccessAction(action, result, restMeta);
+
     if (onSuccess) {
       return of(
         successAction,
-        ...enshureArray(onSuccess(result, restMeta, action))
+        ...ensureArray(onSuccess(result, restMeta, action))
       );
     }
     return of(successAction);
