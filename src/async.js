@@ -34,7 +34,7 @@ export const asyncEpic = (action$, state$) =>
 
       const asyncCall$ = result$.pipe(
         mergeMap(handlers.handleSuccess(action, restMeta, onSuccess)),
-        // takeUntil(handlers.handleAbort(action$, action)),
+        takeUntil(handlers.handleAbort(action$, action)),
         catchError(handlers.handleError(action, restMeta, onError))
       );
 
