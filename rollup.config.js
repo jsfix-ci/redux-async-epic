@@ -5,16 +5,18 @@ import babel from "rollup-plugin-babel";
 
 import pkg from "./package.json";
 
+const external = [
+  ...Object.keys(pkg.dependencies || {}),
+  ...Object.keys(pkg.peerDependencies || {}),
+  "rxjs/operators",
+];
+
 export default [
   // CommonJS
   {
     input: "src/index.js",
     output: { file: pkg.main, format: "cjs", indent: false },
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-      "rxjs/operators",
-    ],
+    external,
     plugins: [babel()],
   },
 
@@ -22,11 +24,7 @@ export default [
   {
     input: "src/index.js",
     output: { file: pkg.module, format: "es", indent: false },
-    external: [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-      "rxjs/operators",
-    ],
+    external,
     plugins: [babel()],
   },
 

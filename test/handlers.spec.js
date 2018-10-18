@@ -53,7 +53,7 @@ describe("Handlers", () => {
 
   it("Should handle error action", () => {
     const result = { error: true };
-    const handler$ = handlers.handleError(testAction, { rest: "meta field" })(
+    const handler$ = handlers.handleFailure(testAction, { rest: "meta field" })(
       result
     );
 
@@ -71,22 +71,22 @@ describe("Handlers", () => {
       },
     });
 
-    const onError = payload => ({
+    const onFailure = payload => ({
       type: "on-error",
       payload,
     });
 
-    const handlerOnError$ = handlers.handleError(
+    const handleronFailure$ = handlers.handleFailure(
       testAction,
       { rest: "another field" },
-      onError
+      onFailure
     )(result);
 
-    let outputOnError = [];
-    handlerOnError$.subscribe(res => outputOnError.push(res));
+    let outputonFailure = [];
+    handleronFailure$.subscribe(res => outputonFailure.push(res));
 
-    expect(handlerOnError$).toBeInstanceOf(Observable);
-    expect(outputOnError).toEqual([
+    expect(handleronFailure$).toBeInstanceOf(Observable);
+    expect(outputonFailure).toEqual([
       {
         type: "test/failure",
         error: { error: true },

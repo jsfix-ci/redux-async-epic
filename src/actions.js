@@ -1,38 +1,35 @@
 import * as symbols from "./symbols";
 import * as types from "./types";
 
-export const getSuccessAction = ({ type }, payload, meta) => ({
-  type: types.getSuccessType(type),
-  payload,
-  meta: {
-    [symbols.success]: true,
-    ...meta,
-  },
-});
+const makeAction = (typeTransformFn, symbol) => {
+  return ({ type }, payload, meta) => {
+    const action = {
+      type: typeTransformFn(type),
+      meta: {
+        [symbol]: true,
+        ...meta,
+      },
+    };
 
-export const getFailureAction = ({ type }, error, meta) => ({
-  type: types.getFailureType(type),
-  error,
-  meta: {
-    [symbols.failure]: true,
-    ...meta,
-  },
-});
+    action[symbol === symbols.failure ? "error" : "payload"] = payload;
 
-export const getPendingAction = ({ type }, payload, meta) => ({
-  type: types.getPendingType(type),
-  payload,
-  meta: {
-    [symbols.pending]: true,
-    ...meta,
-  },
-});
+    return action;
+  };
+};
 
-export const getAbortAction = ({ type }, payload, meta) => ({
-  type: types.getAbortType(type),
-  payload,
-  meta: {
-    [symbols.abort]: true,
-    ...meta,
-  },
-});
+export const getSuccessAction = makeAction(
+  types.getSuccessType,
+  symbols.success
+);
+
+export const getPendingAction = makeAction(
+  types.getPendingType,
+  symbols.pending
+);
+
+export const getAbortAction = makeAction(types.getAbortType, symbols.abort);
+
+export const getFailureAction = makeAction(
+  types.getFailureType,
+  symbols.failure
+);

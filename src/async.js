@@ -16,7 +16,7 @@ export const asyncEpic = (action$, state$) =>
     filter(isAsyncAction),
     withLatestFrom(state$),
     mergeMap(([action, state]) => {
-      const { method, onSuccess, onError, ...restMeta } = action.meta;
+      const { method, onSuccess, onFailure, ...restMeta } = action.meta;
 
       if (!method || typeof method !== "function") {
         return throwError(
@@ -35,7 +35,7 @@ export const asyncEpic = (action$, state$) =>
       const asyncCall$ = result$.pipe(
         mergeMap(handlers.handleSuccess(action, restMeta, onSuccess)),
         takeUntil(handlers.handleAbort(action$, action)),
-        catchError(handlers.handleError(action, restMeta, onError))
+        catchError(handlers.handleFailure(action, restMeta, onFailure))
       );
 
       const startPending$ = of(
