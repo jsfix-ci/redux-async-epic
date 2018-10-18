@@ -1,19 +1,13 @@
 language: node_js
 node_js:
   - "node"
-env:
-  global:
-    - CC_TEST_REPORTER_ID=1098476c80bf93d3655bf986e7e5dfc84f8437a2361541cdcfb43c83f3835df8
 install:
   - npm ci
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 script:
   - npm run test
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm run test:cov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 branches:
   only:
     - master
