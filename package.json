@@ -1,7 +1,7 @@
 {
   "name": "redux-async-epic",
   "version": "0.0.1",
-  "description": "asasdasd",
+  "description": "Make async action easy",
   "main": "lib/index.js",
   "module": "es/index.js",
   "repository": "github:biirus/redux-async-epic",
@@ -24,7 +24,8 @@
     "pretest": "npm run build",
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "test:cov": "npm test -- --coverage"
+    "test:cov": "npm test -- --coverage",
+    "commit": "npx git-cz"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -36,6 +37,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.7.0",
     "eslint-config-react-app": "^3.0.4",
     "eslint-plugin-flowtype": "^2.50.3",
@@ -58,5 +60,10 @@
   },
   "peerDependencies": {
     "rxjs": ">=6.0.0-beta.0 <7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

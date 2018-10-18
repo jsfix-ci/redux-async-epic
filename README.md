@@ -1,9 +1,12 @@
+Make async action easy.
+
 **Redux-Observable** is the great library based on **Rxjs** and helps you to handle side-effects of **Redux** managable application.
 
 To reduce the boilerplate of handling async actions, I've created the **redux-async-epic**. It includes async-epic itself and gives you some handy helpers to manage outgoing actions.
 
 [![Travis (.org)](https://img.shields.io/travis/biirus/redux-async-epic.svg)](https://travis-ci.org/biirus/redux-async-epic)
 [![codecov](https://codecov.io/gh/biirus/redux-async-epic/branch/master/graph/badge.svg)](https://codecov.io/gh/biirus/redux-async-epic)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Instalation
 
