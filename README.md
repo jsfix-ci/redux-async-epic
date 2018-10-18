@@ -3,6 +3,7 @@
 To reduce the boilerplate of handling async actions, I've created the **redux-async-epic**. It includes async-epic itself and gives you some handy helpers to manage outgoing actions.
 
 [![Travis (.org)](https://img.shields.io/travis/biirus/redux-async-epic.svg)](https://travis-ci.org/biirus/redux-async-epic)
+[![codecov](https://codecov.io/gh/biirus/redux-async-epic/branch/master/graph/badge.svg)](https://codecov.io/gh/biirus/redux-async-epic)
 
 ## Instalation
 
