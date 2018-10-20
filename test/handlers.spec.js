@@ -52,7 +52,7 @@ describe("Handlers", () => {
   });
 
   it("Should handle error action", () => {
-    const result = { error: true };
+    const result = new Error("test error");
     const handler$ = handlers.handleFailure(testAction, { rest: "meta field" })(
       result
     );
@@ -63,7 +63,8 @@ describe("Handlers", () => {
     expect(handler$).toBeInstanceOf(Observable);
     expect(output).toEqual({
       type: "test/failure",
-      error: { error: true },
+      payload: new Error("test error"),
+      error: true,
       meta: {
         [symbols.failure]: true,
         rest: "meta field",
@@ -89,7 +90,8 @@ describe("Handlers", () => {
     expect(outputonFailure).toEqual([
       {
         type: "test/failure",
-        error: { error: true },
+        payload: new Error("test error"),
+        error: true,
         meta: {
           [symbols.failure]: true,
           rest: "another field",
@@ -98,7 +100,7 @@ describe("Handlers", () => {
       },
       {
         type: "on-error",
-        payload: { error: true },
+        payload: new Error("test error"),
       },
     ]);
   });

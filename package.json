@@ -1,10 +1,13 @@
 {
   "name": "redux-async-epic",
   "version": "0.0.0-development",
-  "description": "Make async action easy",
+  "description": "Make async actions easy",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "github:biirus/redux-async-epic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biirus/redux-async-epic.git"
+  },
   "bugs": "https://github.com/biirus/redux-async-epic/issues",
   "files": [
     "dist",
@@ -12,8 +15,15 @@
     "es",
     "src"
   ],
+  "keywords": [
+    "redux",
+    "async",
+    "epic",
+    "rxjs",
+    "redux-observable"
+  ],
   "author": "Ivan Burnaev <ivan.biirus@gmail.com>",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf lib dist es coverage",
     "lint": "eslint src test",
@@ -25,9 +35,10 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:cov": "npm test -- --coverage",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "travis-deploy-once": "travis-deploy-once"
+    "commit": "npx git-cz"
+  },
+  "dependencies": {
+    "rxjs": "^6.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -59,12 +70,10 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-terser": "^3.0.0",
-    "rxjs": "^6.3.3",
     "semantic-release": "^15.10.3",
     "travis-deploy-once": "^5.0.9"
   },
   "peerDependencies": {
-    "rxjs": ">=6.0.0 <7",
     "redux-observable": ">=1.0.0 <2",
     "redux": ">=4.0.0 <5"
   },

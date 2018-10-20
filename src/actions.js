@@ -3,15 +3,18 @@ import * as types from "./types";
 
 const makeAction = (typeTransformFn, symbol) => {
   return ({ type }, payload, meta) => {
-    const action = {
+    let action = {
       type: typeTransformFn(type),
+      payload,
       meta: {
         [symbol]: true,
         ...meta,
       },
     };
 
-    action[symbol === symbols.failure ? "error" : "payload"] = payload;
+    if (symbol === symbols.failure) {
+      action.error = true;
+    }    
 
     return action;
   };

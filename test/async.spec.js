@@ -96,7 +96,8 @@ describe("Async", () => {
       },
       {
         type: "test/failure",
-        error: { someError: 123 },
+        payload: { someError: 123 },
+        error: true,
         meta: {
           [symbols.failure]: true,
           originalPayload: {

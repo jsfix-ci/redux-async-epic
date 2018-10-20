@@ -67,7 +67,8 @@ describe("Checkings", () => {
   it("Should return FailureAction", () => {
     expect(actions.getFailureAction(testAction, { a: 1 })).toEqual({
       type: "test/failure",
-      error: { a: 1 },
+      payload: { a: 1 },
+      error: true,
       meta: {
         [symbols.failure]: true,
       },
@@ -75,7 +76,8 @@ describe("Checkings", () => {
 
     expect(actions.getFailureAction(testAction, { b: 1 })).toEqual({
       type: "test/failure",
-      error: { b: 1 },
+      payload: { b: 1 },
+      error: true,
       meta: {
         [symbols.failure]: true,
       },
@@ -85,6 +87,7 @@ describe("Checkings", () => {
       actions.getFailureAction(testAction, true, { other: "meta field" })
     ).toEqual({
       type: "test/failure",
+      payload: true,
       error: true,
       meta: {
         [symbols.failure]: true,

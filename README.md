@@ -1,4 +1,4 @@
-Make async action easy.
+Make async actions easy.
 
 **Redux-Observable** is the great library based on **Rxjs** and helps you to handle side-effects of **Redux** managable application.
 
@@ -7,6 +7,7 @@ To reduce the boilerplate of handling async actions, I've created the **redux-as
 [![Travis (.org)](https://img.shields.io/travis/biirus/redux-async-epic.svg)](https://travis-ci.org/biirus/redux-async-epic)
 [![codecov](https://codecov.io/gh/biirus/redux-async-epic/branch/master/graph/badge.svg)](https://codecov.io/gh/biirus/redux-async-epic)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ## Instalation
 
@@ -20,7 +21,10 @@ This assumes you are using [npm](https://www.npmjs.com/) as your package manager
 
 ## Dependencies
 
-The library has 3 peer dependencies: **rxjs**, **redux-observable** and of course **redux**.
+The library depends only on **rxjs** but also has 2 peer dependencies:
+
+- redux-observable
+- redux
 
 ## Why do I need it?
 
@@ -155,10 +159,10 @@ It's time to **redux-async-epic** to shine! To use it, you need to combine async
 import { combineEpics } from "redux-observable";
 import { asyncEpic } from "redux-async-epic";
 
-export const rootEpit = combinEpics(asyncEpic); // more of your epics
+export const rootEpit = combineEpics(asyncEpic); // more of your epics
 ```
 
-The you should define your async action as _flux-standard-action_:
+Now you should define your async action as [_flux-standard-action_](https://github.com/redux-utilities/flux-standard-action):
 
 ```js
 // actions.js
@@ -220,7 +224,7 @@ export default handleActions({
     return {
       ...state,
       uiStatus: "failure",
-      error: action.error
+      error: action.payload
     };
   },
 
@@ -340,7 +344,7 @@ const prefetchNextPage = payload => {
 };
 ```
 
-You can fire even more actions by passing an array of it:
+You can fire even more actions by passing an array of them:
 
 ```js
 onSuccess: () => [first(), second(), third()];
