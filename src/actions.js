@@ -14,7 +14,7 @@ const makeAction = (typeTransformFn, symbol) => {
 
     if (symbol === symbols.failure) {
       action.error = true;
-    }    
+    }
 
     return action;
   };
