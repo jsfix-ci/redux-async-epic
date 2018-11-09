@@ -72,22 +72,22 @@ describe("Handlers", () => {
       },
     });
 
-    const onFailure = payload => ({
+    const onError = payload => ({
       type: "on-error",
       payload,
     });
 
-    const handleronFailure$ = handlers.handleFailure(
+    const handleronError$ = handlers.handleFailure(
       testAction,
       { rest: "another field" },
-      onFailure
+      onError
     )(result);
 
-    let outputonFailure = [];
-    handleronFailure$.subscribe(res => outputonFailure.push(res));
+    let outputonError = [];
+    handleronError$.subscribe(res => outputonError.push(res));
 
-    expect(handleronFailure$).toBeInstanceOf(Observable);
-    expect(outputonFailure).toEqual([
+    expect(handleronError$).toBeInstanceOf(Observable);
+    expect(outputonError).toEqual([
       {
         type: "test/failure",
         payload: new Error("test error"),
