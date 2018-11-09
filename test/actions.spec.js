@@ -64,33 +64,33 @@ describe("Checkings", () => {
     });
   });
 
-  it("Should return FailureAction", () => {
-    expect(actions.getFailureAction(testAction, { a: 1 })).toEqual({
-      type: "test/failure",
+  it("Should return ErrorAction", () => {
+    expect(actions.getErrorAction(testAction, { a: 1 })).toEqual({
+      type: "test/error",
       payload: { a: 1 },
       error: true,
       meta: {
-        [symbols.failure]: true,
+        [symbols.error]: true,
       },
     });
 
-    expect(actions.getFailureAction(testAction, { b: 1 })).toEqual({
-      type: "test/failure",
+    expect(actions.getErrorAction(testAction, { b: 1 })).toEqual({
+      type: "test/error",
       payload: { b: 1 },
       error: true,
       meta: {
-        [symbols.failure]: true,
+        [symbols.error]: true,
       },
     });
 
     expect(
-      actions.getFailureAction(testAction, true, { other: "meta field" })
+      actions.getErrorAction(testAction, true, { other: "meta field" })
     ).toEqual({
-      type: "test/failure",
+      type: "test/error",
       payload: true,
       error: true,
       meta: {
-        [symbols.failure]: true,
+        [symbols.error]: true,
         other: "meta field",
       },
     });

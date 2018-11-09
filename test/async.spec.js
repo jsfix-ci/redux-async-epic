@@ -76,7 +76,7 @@ describe("Async", () => {
     ]);
   });
 
-  it("Should return an Observable of 3 actions [pending, failure, pending]", () => {
+  it("Should return an Observable of 3 actions [pending, error, pending]", () => {
     actionStream$.next({
       type: "test",
       payload: { a: 123 },
@@ -95,11 +95,11 @@ describe("Async", () => {
         },
       },
       {
-        type: "test/failure",
+        type: "test/error",
         payload: { someError: 123 },
         error: true,
         meta: {
-          [symbols.failure]: true,
+          [symbols.error]: true,
           originalPayload: {
             a: 123,
           },

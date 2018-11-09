@@ -1,8 +1,8 @@
 import * as types from "../src/types";
 
 describe("Types", () => {
-  it("Should return failure type", () => {
-    expect(types.getFailureType("test")).toEqual("test/failure");
+  it("Should return error type", () => {
+    expect(types.getErrorType("test")).toEqual("test/error");
   });
 
   it("Should return success type", () => {

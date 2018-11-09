@@ -26,15 +26,15 @@ describe("Checkings", () => {
     ).toBeTruthy();
   });
 
-  it("Should return `false` for the not failure action", () => {
-    expect(checkings.isFailureAction({})).toBeFalsy();
-    expect(checkings.isFailureAction({ meta: {} })).toBeFalsy();
-    expect(checkings.isFailureAction({ meta: { failure: true } })).toBeFalsy();
+  it("Should return `false` for the not error action", () => {
+    expect(checkings.isErrorAction({})).toBeFalsy();
+    expect(checkings.isErrorAction({ meta: {} })).toBeFalsy();
+    expect(checkings.isErrorAction({ meta: { error: true } })).toBeFalsy();
   });
 
-  it("Should return `true` for the failure action", () => {
+  it("Should return `true` for the error action", () => {
     expect(
-      checkings.isFailureAction({ meta: { [symbols.failure]: true } })
+      checkings.isErrorAction({ meta: { [symbols.error]: true } })
     ).toBeTruthy();
   });
 

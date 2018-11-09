@@ -6,8 +6,8 @@ export const isAsyncAction = action =>
 export const isPendingAction = action =>
   action.meta && !!action.meta[symbols.pending];
 
-export const isFailureAction = action =>
-  action.meta && !!action.meta[symbols.failure];
+export const isErrorAction = action =>
+  action.meta && !!action.meta[symbols.error];
 
 export const isSuccessAction = action =>
   action.meta && !!action.meta[symbols.success];

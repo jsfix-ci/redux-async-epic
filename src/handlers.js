@@ -12,18 +12,15 @@ export const handleAbort = (action$, action) => {
   );
 };
 
-export const handleFailure = (action, restMeta, onError) => {
+export const handleError = (action, restMeta, onError) => {
   return error => {
     restMeta.originalPayload = action.payload;
-    const failureAction = actions.getFailureAction(action, error, restMeta);
+    const errorAction = actions.getErrorAction(action, error, restMeta);
 
     if (onError) {
-      return of(
-        failureAction,
-        ...ensureArray(onError(error, restMeta, action))
-      );
+      return of(errorAction, ...ensureArray(onError(error, restMeta, action)));
     }
-    return of(failureAction);
+    return of(errorAction);
   };
 };
 

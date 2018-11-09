@@ -12,7 +12,7 @@ const makeAction = (typeTransformFn, symbol) => {
       },
     };
 
-    if (symbol === symbols.failure) {
+    if (symbol === symbols.error) {
       action.error = true;
     }
 
@@ -32,7 +32,4 @@ export const getPendingAction = makeAction(
 
 export const getAbortAction = makeAction(types.getAbortType, symbols.abort);
 
-export const getFailureAction = makeAction(
-  types.getFailureType,
-  symbols.failure
-);
+export const getErrorAction = makeAction(types.getErrorType, symbols.error);
