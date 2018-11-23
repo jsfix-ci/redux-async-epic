@@ -1,4 +1,4 @@
-import { Observable, of, concat, throwError } from "rxjs";
+import { of, concat, throwError, isObservable } from "rxjs";
 import {
   filter,
   mergeMap,
@@ -26,7 +26,7 @@ export const asyncEpic = (action$, state$) =>
 
       const result$ = method(action, state);
 
-      if (!(result$ instanceof Observable)) {
+      if (!isObservable(result$)) {
         return throwError(
           "[async] meta.method should return an Observable instance"
         );
